@@ -1,6 +1,6 @@
 //Naming Question vs QuestionCard vs QuestionData 
 
-import { QuestionDataInterface, QuestionData } from "./QuizQuestionData";
+import { QuestionDataInterface } from "./QuizQuestionData";
 import { QuestionType, QuestionTypeBoxes } from "./QuizQuestionType";
 
 //Takes an Array of Questions in. Must be more than one and less than ???
@@ -16,12 +16,14 @@ export class QuizStack {
             this.QuestionStack.push(currQuestionCard);
         }
     }
+
+
 }
 
 
 export class QuestionCard {
     Question: QuestionDataInterface;
-    ID: number; // some Int I dont care which. Just simple
+    UniqueQuestionID: number; // some Int I dont care which. Just simple
     IsAnswered: boolean | null = null;
     IsCorrect: boolean | null = null;
     GivenAnswer: string | null = null;
@@ -33,7 +35,7 @@ export class QuestionCard {
 
     constructor(questionData: QuestionDataInterface, id:number, questionType: QuestionType) {
         this.Question = questionData;
-        this.ID = id;
+        this.UniqueQuestionID = id;
         this.QuestionType = new QuestionTypeBoxes();
     }
 }
