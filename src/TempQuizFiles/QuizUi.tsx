@@ -53,13 +53,14 @@ const QuizUI: React.FC = () => {
 
     return (
         <div>
+                        <button>EXIT</button>
+
             <QuizUiComponent
                 currentQuestion={currentQuestion}
                 selectedAnswer={selectedAnswer}
                 onAnswerClick={onAnswerClickFunction}
             />
             <button onClick={finishQuestionn}>NEXT QUESTION. ListOfUnused: {quizImplementation.UnusedQuizStack.length}</button>
-
         </div>
     );
 };

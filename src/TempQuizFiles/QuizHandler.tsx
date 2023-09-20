@@ -86,6 +86,10 @@ export class QuizHandler{
             new QuestionData("What is the Hiragana: め?","Me",["So","Mo","Nu","Ta"]),
             new QuestionData("What is the Hiragana: る?","Ru",["Ro","Mu","Ne","Yo"]),
             new QuestionData("What is the Hiragana: ろ?","Ro",["Ru","Mo","He","Mo"]),
+            new QuestionData("What is the KANJI: ⼼?","heart",["lol","ok","No","Klarr"]),
+            new QuestionData("What is the KANJI: 心配?","No Idea",["yes","ok","No","Klarr"]),
+
+            
         ];
        
         return new QuizStack(TestQuizStack);
