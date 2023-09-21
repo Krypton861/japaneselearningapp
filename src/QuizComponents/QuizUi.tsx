@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { QuizHandlerImplementation } from "./QuizImplementation";
+import { QuizHandlerImplementation } from "./QuizHandlerImplementation";
 import QuizUiComponent  from "./QuizUIComponent";
 import { QuestionCard } from "./QuizStack";
 
