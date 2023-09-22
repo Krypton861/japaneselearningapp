@@ -51,3 +51,6 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 Inspiration:
 https://kanjiquizzer.com/
+
+npm install react-router-dom
+npm install firebase

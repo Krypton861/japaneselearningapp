@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { QuizHandlerImplementation } from "./QuizHandlerImplementation";
-import QuizUiComponent  from "./QuizUIComponent";
+import QuizUiComponent  from "./QuizQuestionUI";
 import { QuestionCard } from "./QuizStack";
 
 

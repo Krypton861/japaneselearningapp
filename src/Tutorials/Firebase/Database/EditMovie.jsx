@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { movieCollectionRef } from "./firestore.collections";
 import { addDoc, doc, updateDoc } from "firebase/firestore";
-import db from "./initFirebase";
+import app from "../Config/initFirebase";
+import { getFirestore } from "firebase/firestore";
 
 export default function EditMovie() {
     const [name, setName] = useState("")
@@ -13,6 +14,7 @@ export default function EditMovie() {
             return;
 
         console.log("Name:" + name + " | id: " + id);
+        const db = getFirestore(app);
         const docRef = doc(db,"Movies", id);
 
         updateDoc(docRef,{Name:name})

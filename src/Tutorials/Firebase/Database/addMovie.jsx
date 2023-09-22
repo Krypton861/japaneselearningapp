@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
-import db from "./initFirebase";
+import { movieCollectionRef } from "./firestore.collections";
 
 export default function AddMovie() {
     const [name, setName] = useState("")
@@ -10,7 +10,6 @@ export default function AddMovie() {
         if(name=== "")
             return;
 
-        const movieCollectionRef = collection(db, "Movies"); //second one is Collection Name
 
         addDoc(movieCollectionRef,{Name:name})
             .then(response => {
