@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
-import { movieCollectionRef } from "./firestore.collections";
+import { movieCollectionRef } from "../../../Configs/firestoreDBCollections";
 
 export default function AddMovie() {
     const [name, setName] = useState("")

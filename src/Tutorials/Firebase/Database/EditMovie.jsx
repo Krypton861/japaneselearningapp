@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { movieCollectionRef } from "./firestore.collections";
+import { movieCollectionRef } from "../../../Configs/firestoreDBCollections";
 import { addDoc, doc, updateDoc } from "firebase/firestore";
 import app from "../Config/initFirebase";
 import { getFirestore } from "firebase/firestore";

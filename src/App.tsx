@@ -7,11 +7,13 @@ import QuizUI from './Components/Quiz/QuizUi';
 import UserProfileUI from './Components/UserProfile/UserProfileUI';
 import LandingPage from './MainPages/LandingPage';
 import Navbar from './MainPages/Navbar';
-import LoginPage from './Components/LoginPage/LoginPage';
+import LoginPage from './Components/LoginPage/LoginPageUI';
+import { UserProvider } from './Contexts/UserContext';
 
 function App() {
 
   return (
+    <UserProvider>
 
     <div className="App">
       <header className="App-header">
@@ -24,7 +26,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/user-info" element={<UserProfileUI />} />
+            <Route path="/user" element={<UserProfileUI />} />
             <Route path="/product" element={<QuizUI />} />
             {/* Catch-all route */}
             <Route path="*" element={<LandingPage />} />
@@ -35,6 +37,7 @@ function App() {
 
       </header>
     </div>
+    </UserProvider>
   );
 }
 
