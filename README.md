@@ -24,6 +24,9 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ### `npm run build`
 
+!!!POSSIBLE ERROR!!!
+CHECK THE JS REF FILES. AND CHANGE "/static/..." TO "./static/...". Otherwise it looks in the Root Directory of the Project. And not the Current Path
+
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
@@ -47,3 +50,14 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+Inspiration:
+https://kanjiquizzer.com/
+
+npm install react-router-dom
+npm install firebase
+npm install @mui/material @emotion/react @emotion/styled
+
+npm install -g firebase-tools
+npm i firebase

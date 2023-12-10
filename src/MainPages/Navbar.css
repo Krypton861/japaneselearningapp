@@ -1,0 +1,14 @@
+/* Add spacing between Link elements */
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Creates equal spacing between Link elements */
+    padding: 10px; /* Adjust as needed for your design */
+  }
+  
+  /* Style Link elements as needed */
+  .navbar a {
+    /*text-decoration: none;*/
+    color: green; /* Change color as needed */
+    margin: 0 10px; /* Adjust the margin for the desired gap between links */
+  }
+  

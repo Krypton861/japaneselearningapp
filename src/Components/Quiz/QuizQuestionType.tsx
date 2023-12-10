@@ -1,3 +1,4 @@
+//THIS IS CURRENTLY NOT USED AND USELESS!!!
 
 export interface QuestionType{
     //Here we put a class that tells us what kind of Question we do.
