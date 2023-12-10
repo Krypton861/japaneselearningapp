@@ -69,7 +69,7 @@ const initialUserData: UserData = {
   // ... other fields initialized
 };
 
-const UserContext = createContext<UserContextProps | undefined>(undefined);
+const UserContext = createContext<UserContextProps | null>(null);
 
 export const useUserContext  = () => {
   const context = useContext(UserContext);

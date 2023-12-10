@@ -23,15 +23,13 @@ export default function Navbar() {
       <div className="navbar">
 
         {/* Use the Link component to navigate to different views */}
-        <Link to="/">Landing Page</Link>
+        <Link to="/">Home</Link>
+        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/quizz">Quizz</Link>
         <Link to="/login">Login</Link>
-        <Link to="/user">User Info</Link>
-        <Link to="/product">Product</Link>
+        <Link to="/test">Test</Link>
 
         <ProfileIcon></ProfileIcon>
-        <div>
-          userID: {userData.userId}
-        </div>
 
       </div>
 

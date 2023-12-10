@@ -5,11 +5,12 @@ interface Props {
   type: string;
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  isDisabled?: boolean;
 }
 
 //Sets the Label, Type and Value and the onChange Element of an Input Field.
 //If the type is "password" - an extra Button to hide and show the Password is added
-const InputComponent: React.FC<Props> = ({ label, type, value, onChange }) => {
+const InputComponent: React.FC<Props> = ({ label, type, value, onChange, isDisabled=false }) => {
   const [showPassword, setShowPassword] = useState(false);
   //isPassword checks if the input type should be a password field. 
   //If type === 'password', then isPassword will be true.
@@ -19,7 +20,12 @@ const InputComponent: React.FC<Props> = ({ label, type, value, onChange }) => {
     setShowPassword(!showPassword);
   };
 
+  if (isDisabled) {
+    return null; // Render nothing if isVisible is false
+  }
+
   return (
+   
     <div>
       <label>{label}:</label>
       <input 

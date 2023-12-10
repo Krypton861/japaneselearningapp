@@ -1,32 +1,29 @@
 
+//This Interface is the bare minimum to create a QuestionCard/Data. Use it while creating. 
+//All other info gets added in QuestionData COnstuctor
 export interface QuestionDataInterface{
     QuestionText:string;
     CorrectAnswer:string;
-    CorrectAnswerIndex: number;
-    wrongAnswerOptions:string[];
-    allAnswerOptions:string[];
-
-    //successTip:string;
-    //helpHimTip:string
+    WrongAnswerOptions:string[];
 }
 
 export class QuestionData implements QuestionDataInterface {
     QuestionText:string;
     CorrectAnswer:string;
     CorrectAnswerIndex: number;
-    wrongAnswerOptions:string[];
-    allAnswerOptions:string[];
+    WrongAnswerOptions:string[];
+    AllAnswerOptions:string[];
 
     constructor(questionText: string, correctAnswer: string, wrongAnswerOptions:string[]){
         this.QuestionText = questionText;
-        this.wrongAnswerOptions = wrongAnswerOptions;
+        this.WrongAnswerOptions = wrongAnswerOptions;
         this.CorrectAnswer = correctAnswer;
 
         //Take correct Answer and wrong Answer and create new List.
-        this.allAnswerOptions = wrongAnswerOptions;
-        this.allAnswerOptions.push(correctAnswer);
+        this.AllAnswerOptions = wrongAnswerOptions;
+        this.AllAnswerOptions.push(correctAnswer);
         //Shuffle all the Answer Options here so later at display and handeling it is all random allready
-        this.allAnswerOptions.sort((a, b) => 0.5 - Math.random());
-        this.CorrectAnswerIndex = this.allAnswerOptions.indexOf(this.CorrectAnswer);
+        this.AllAnswerOptions.sort((a, b) => 0.5 - Math.random());
+        this.CorrectAnswerIndex = this.AllAnswerOptions.indexOf(this.CorrectAnswer);
     } 
 }

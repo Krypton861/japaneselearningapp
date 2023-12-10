@@ -1,7 +1,7 @@
 import { collection, getFirestore } from "firebase/firestore";
-import app from "../Config/initFirebase";
-
-const db = getFirestore(app);
+import db from "./initDB";
 
 export const movieCollectionRef = collection(db,"Movies");
+export const expCollectionRef = collection(db,"exp");
+export const userCollectionRef = collection(db,"users");
 

@@ -13,8 +13,10 @@ const LoginPage: React.FC = () => {
   //#region Firebase Authentification Logic
   const [email, setEmail] = useState<string>("mycoolemail@gmail.com");
   const [password, setPassword] = useState<string>("123456");
+  const [passwordCheck, setPasswordCheck] = useState<string>("");
   const [isQuerying, setIsQuerying] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [stateIsLogin, setStateIsLogin] = useState(true);     //When first pressed Siogn In. Then Enable the second Password Column and Rules to check for Sign in instead of Login
 
   //From the Global Context File where we manage the USER Core Data
   const { userData, setUserData } = useUserContext();
@@ -53,6 +55,15 @@ const LoginPage: React.FC = () => {
 
   const handleSignUp = async () => {
     //console.log("email:", email, "\nPassword:", password);
+    
+    //TODO: THIS IS STUPID. Seperate Login and Sign in and adjust the Input COmponent aswell.
+    //When first pressed Siogn In. Then Enable the second Password Column and Rules to check for Sign in instead of Login
+    if(stateIsLogin == true)
+    {
+      setStateIsLogin(false)
+      return;
+    }
+
     setIsQuerying(true);
 
     try {
@@ -101,7 +112,12 @@ const LoginPage: React.FC = () => {
   
   const handlePasswordChange = (newPassword: string) => {
     setPassword(newPassword);
-    setPasswordError(validatePassword(newPassword) ? null : "Password must be at least 6 characters");
+    setPasswordError(validatePassword(newPassword, passwordCheck));
+  };
+
+  const handlePasswordCheckChange = (newPassword: string) => {
+    setPasswordCheck(newPassword);
+    setPasswordError(validatePassword(newPassword, password));
   };
     
   const validateEmail = (email: string) => {
@@ -109,8 +125,13 @@ const LoginPage: React.FC = () => {
     return re.test(String(email).toLowerCase());
   };
   
-  const validatePassword = (password: string) => {
-    return password.length >= 6;
+  const validatePassword = (newPassword: string, otherPassword: string) => {
+    if (newPassword.length < 4)
+      return "Password must be at least 4 characters";
+    else if(!stateIsLogin && (newPassword !== otherPassword))
+      return "Passwords must be Identical to register";
+
+    return null;
   };
   
 
@@ -161,10 +182,10 @@ const LoginPage: React.FC = () => {
       <h2>Login Page</h2>
       {userData.userId  ? (
         <div>
-          <LogoutComponent onLogout={handleLogout} />
           <div>
             Welcome {email}.<br /> You successfully logged in.
           </div>
+          <LogoutComponent onLogout={handleLogout} />
         </div>
 
       ) : (
@@ -183,7 +204,17 @@ const LoginPage: React.FC = () => {
             value={password}
             onChange={(e) => handlePasswordChange(e.target.value)}
           />
-          {passwordError && <div style={{ color: 'red' }}>{passwordError}</div>}
+          
+          <InputComponent
+            label="Password"
+            type="password"
+            value={passwordCheck}
+            onChange={(e) => handlePasswordCheckChange(e.target.value)}
+            isDisabled = {stateIsLogin}
+          />
+
+
+          {passwordError && <div style={{ color: 'yellow' }}>{passwordError}</div>}
           {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
           {isQuerying ? <div>Loading...</div> : null}
 

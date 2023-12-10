@@ -1,5 +1,5 @@
 import React from "react";
-import { QuestionCard } from "./QuizStack";
+import { QuestionCard } from "./QuestionCard";
 
 //Interface for the Component for clear documented Data Types
 interface QuizUiComponentProps {
@@ -8,7 +8,7 @@ interface QuizUiComponentProps {
     };
     selectedAnswer: {
         selectedAnswerText: string;
-        isCorrect:boolean;
+        isCorrect: boolean;
     } | null;
     onAnswerClick: (optionIndex: number, option: string) => void; // Define the prop type
 }
@@ -24,14 +24,30 @@ const QuizUiComponent: React.FC<QuizUiComponentProps> = ({
     }
     const questionCard = currentQuestion.currentQuestion; // Safely access currentQuestion
 
+    const answerButtonStyle: React.CSSProperties = {
+        width: '51%', // Adjust width as needed
+        backgroundColor: '#fcba03',
+        fontSize: '1.5EM',
+    };
+
+    const answersContainerStyle: React.CSSProperties = {
+        display: 'flex',
+    };
+
+    const questionContainerStyle: React.CSSProperties = {
+        padding:'15px'
+    };
+
     return (
         <div>
-            <div>
+            <div style={questionContainerStyle}>
                 {questionCard.Question.QuestionText}
-                __TIP: {questionCard.Question.CorrectAnswerIndex}
+                {/*__TIP: {questionCard.Question.CorrectAnswerIndex}*/}
             </div>
-            {questionCard.Question.allAnswerOptions.map((option, optionIndex) => (
-                <button key={optionIndex}
+
+            <div style={answersContainerStyle}>
+            {questionCard.Question.AllAnswerOptions.map((option, optionIndex) => (
+                <button key={optionIndex} style={answerButtonStyle}
                     onClick={() => {
                         onAnswerClick(optionIndex, option);
                     }}
@@ -39,6 +55,7 @@ const QuizUiComponent: React.FC<QuizUiComponentProps> = ({
                     {option}
                 </button>
             ))}
+            </div>
 
             <p>{selectedAnswer?.selectedAnswerText} IS {selectedAnswer?.isCorrect.toString()}</p>
 
