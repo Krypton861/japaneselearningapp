@@ -1,6 +1,9 @@
-import { QuizStack, QuestionCard } from "./QuizStack";
-import { QuestionData } from "./QuizQuestionData";
+import { QuizStack } from "./QuizStack";
+import { QuestionData, QuestionDataInterface } from "./QuizQuestionData";
 import { QuestionType,QuestionTypeBoxes } from "./QuizQuestionType";
+import { QuestionCard } from "./QuestionCard";
+import { DeckDataInterface } from "../../Contexts/DecksContext";
+
 //Naming: QuizDeck vs QuizStack 
 // Unused/Used vs New/Old bs Fresh/Spent
 
@@ -20,9 +23,21 @@ export class QuizHandler{
 
     currQuestion:QuestionCard | null = null;
 
+    //Idea: Generate possible Answers depending on the Stack? - But what if stack too smalll?
     constructor(quizStack: QuizStack, questionType:QuestionType = new QuestionTypeBoxes()){
         //Initialisiere den Handler. Set Questions. Shuffle Questions. 
-        //Idea: Generate possible Answers depending on the Stack? - But what if stack too smalll?
+        this.FullQuizStack = quizStack;
+        this.UnusedQuizStack = quizStack.QuestionStack;
+        this.UsedQuizStack = [];
+
+        this.QuestionType = questionType;
+
+        //Initialise the Class with the first Question ready to go.
+        this.GetNewQuestion();
+    }
+
+    
+    updateQuizData(quizStack: QuizStack, questionType:QuestionType = new QuestionTypeBoxes()){
         this.FullQuizStack = quizStack;
         this.UnusedQuizStack = quizStack.QuestionStack;
         this.UsedQuizStack = [];
@@ -86,9 +101,57 @@ export class QuizHandler{
             new QuestionData("What is the Hiragana: め?","Me",["So","Mo","Nu","Ta"]),
             new QuestionData("What is the Hiragana: る?","Ru",["Ro","Mu","Ne","Yo"]),
             new QuestionData("What is the Hiragana: ろ?","Ro",["Ru","Mo","He","Mo"]),
-        ];
-       
+        ];       
         return new QuizStack(TestQuizStack);
+    }
+
+    static GenerateEmptyQuizStack(){
+        let TestQuizStack:QuestionData[] = [
+            new QuestionData("","",[""]),
+        ];       
+        return new QuizStack(TestQuizStack);
+    }
+
+    static createQuizStackFromData(deckData: DeckDataInterface){
+
+        /*const newQuestionData:QuestionDataInterface[] = deckData.questionData.map((doc) => ({
+            QuestionText: doc.QuestionText,
+            CorrectAnswer: doc.CorrectAnswer,
+            WrongAnswerOptions: doc.WrongAnswerOptions,
+        }));*/
+
+        var questionDataList: QuestionData[] = [];
+        deckData.questionData.forEach(doc => {
+            //Check if all Strings are empty string, false, 0, null, undefined, ...
+            if (!doc.QuestionText || !doc.CorrectAnswer || !doc.WrongAnswerOptions) {
+                return null;
+            }
+            
+            //The Database array is saved as an String -> Split it again. 
+            var wrongAnswers: string[] = [];
+
+            //Check is String, Then Split it accordingly.
+            if(typeof(doc.WrongAnswerOptions) === "string"){
+                wrongAnswers = (doc.WrongAnswerOptions as string).split(',');
+            }
+            else if(doc.WrongAnswerOptions instanceof Object) { //Assume it is an weird Bug that typescript things it is a array but is actually an string
+                wrongAnswers = (doc.WrongAnswerOptions as unknown as string).split(',');
+            }
+
+            questionDataList.push(new QuestionData(doc.QuestionText,doc.CorrectAnswer, wrongAnswers));
+
+        });
+
+        //console.log(questionDataList);        
+        return new QuizStack(questionDataList);;
+
+        /*for(var i in unformatedData){
+            unformatedData[i].Author
+        }
+        var newQuestionData = QuestionData[];
+        var newQuizStack = new QuizStack();
+        */
+        //return this.GenerateEmptyQuizStack();
     }
 
     //If the initialization of your class and the shuffling logic is happening in the component's constructor or within the component's render method, 

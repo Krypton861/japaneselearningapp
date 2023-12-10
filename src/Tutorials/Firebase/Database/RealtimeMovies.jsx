@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { onSnapshot } from "firebase/firestore";
-import { movieCollectionRef } from "./firestore.collections";
+import { movieCollectionRef } from "../../../Configs/firestoreDBCollections";
 
 export default function RealtimeMovies() {
     const [movies, setMovies] = useState([])
