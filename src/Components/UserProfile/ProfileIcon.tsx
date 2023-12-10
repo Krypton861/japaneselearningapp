@@ -6,7 +6,7 @@ const ProfileIcon: React.FC = () => {
   const navigate = useNavigate();
 
   const goToProfile = () => {
-    navigate('/profile');
+    navigate('/user');
   };
 
   return (
